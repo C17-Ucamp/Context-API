@@ -6,6 +6,8 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Login from './components/Login.jsx'
 import { UserProvider } from './context/UserContext.jsx'
 import Profile from './components/Profile.jsx'
+import Admin from './components/Admin.jsx'
+import ProductProvider from './context/ProductContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,15 @@ const router = createBrowserRouter([
   {
     path: '/profile',
     element: <UserProvider><Profile /></UserProvider>
+  },
+  {
+    path: '/admin',
+    element: (
+    <UserProvider>
+    <ProductProvider>
+        <Admin />
+    </ProductProvider>
+    </UserProvider>)
   }
 ])
 
