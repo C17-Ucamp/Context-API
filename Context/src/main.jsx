@@ -8,6 +8,8 @@ import { UserProvider } from './context/UserContext.jsx'
 import Profile from './components/Profile.jsx'
 import Admin from './components/Admin.jsx'
 import ProductProvider from './context/ProductContext.jsx'
+import ChangePassword from './components/ChangePassword.jsx'
+import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,14 @@ const router = createBrowserRouter([
   },
   {
     path: '/profile',
-    element: <UserProvider><Profile /></UserProvider>
+    element: (<PayPalScriptProvider options={{ "client-id": "ARm7diFz42A9mDQyWkI6yVf4vcZYCHC5fU4c7oEkKaRMckv2wePn2z2XOCWZVJGW296wo8WpEZSgWK-a",
+    components: "buttons",
+    currency: "USD" }}>
+      <UserProvider>
+        <Profile />
+      </UserProvider>
+      </PayPalScriptProvider>
+      )
   },
   {
     path: '/admin',
@@ -30,6 +39,14 @@ const router = createBrowserRouter([
         <Admin />
     </ProductProvider>
     </UserProvider>)
+  },
+  {
+    path: '/changePassword',
+    element:(
+      <UserProvider>
+        <ChangePassword />
+      </UserProvider>
+    )
   }
 ])
 
